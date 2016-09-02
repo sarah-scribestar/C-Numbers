@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Numbers;
 
 /* The aim is to convert a numerical digit into the corresponding English word */
 namespace Numbers
 {
-    class Program
+    class NumbersProgram
     {
 
         static void Main(string[] args)
