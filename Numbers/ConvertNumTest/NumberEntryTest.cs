@@ -16,7 +16,7 @@ namespace ConvertNumTest
             ConvertNum cn = new ConvertNum();
 
             // act
-            cn.Convert(entryNum);
+            NumbersProgram   (entryNum);
 
             // assert
             string result = cn.Convert(entryNum);

@@ -8,23 +8,20 @@ using Numbers;
 /* The aim is to convert a numerical digit into the corresponding English word */
 namespace Numbers
 {
-    class NumbersProgram
+    public class NumbersProgram
     {
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Enter a number");
             string input = Console.ReadLine();
             if (input.Length == 0)
             {
-                Console.WriteLine("Please enter a number between -999,999,999,999 to 999,999,999,999 to any number of decimal places");
+                Console.WriteLine("Please enter a number between -999,999,999,999 to 999,999,999,999");
             }
             ConvertNum cn = new ConvertNum();
             cn.Convert(input);
             Console.ReadKey();
-
         }
-
-        //Console.WriteLine("Please enter a number between -999,999,999,999 to 999,999,999,999 to any number of decimal places");
-
     }
 }

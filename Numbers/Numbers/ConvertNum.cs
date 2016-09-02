@@ -212,7 +212,7 @@ namespace Numbers
                 string m = input.Substring(1, 3);
                 string th = input.Substring(2, 3);
                 string h = input.Substring(5, 3);
-                Console.WriteLine(Minus + "{0} Billion {1} Million, {2} Thousand, {3}", Units(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
+                Console.WriteLine(Minus + "{0} Billion, {1} Million, {2} Thousand, {3}", Units(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
             }
             if (length == 11) //10,000,000,000
             {
@@ -220,7 +220,7 @@ namespace Numbers
                 string m = input.Substring(2, 3);
                 string th = input.Substring(5, 3);
                 string h = input.Substring(8, 3);
-                Console.WriteLine(Minus + "{0} Billion {1} Million, {2} Thousand, {3}", Tens(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
+                Console.WriteLine(Minus + "{0} Billion, {1} Million, {2} Thousand, {3}", Tens(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
             }
             if (length == 12) //100,000,000,000
             {
@@ -228,7 +228,7 @@ namespace Numbers
                 string m = input.Substring(3, 3);
                 string th = input.Substring(6, 3);
                 string h = input.Substring(9, 3);
-                Console.WriteLine(Minus + "{0} Billion {1} Million, {2} Thousand, {3}", Hundreds(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
+                Console.WriteLine(Minus + "{0} Billion, {1} Million, {2} Thousand, {3}", Hundreds(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
             }
 
             if (length > 12)
