@@ -1,8 +1,0 @@
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\bin\Debug\ConsoleApplication3.exe.config
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\bin\Debug\ConsoleApplication3.exe
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\bin\Debug\ConsoleApplication3.pdb
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.csprojResolveAssemblyReference.cache
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.exe
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.pdb
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\bin\Debug\FileHelpers.dll
-c:\users\sarah.wilson\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\bin\Debug\FileHelpers.xml
