@@ -47,42 +47,46 @@ namespace Numbers
             return null;
         }
 
-        private static string Tens(string tens)
+        static Dictionary<string, string> _teensDict = new Dictionary<string, string>
+            {
+                {"0", "Ten"}, 
+                {"1", "Eleven"},
+                {"2", "Twelve"},
+                {"3", "Thirteen"},
+                {"4", "Fourteen"},
+                {"5", "Fifteen"},
+                {"6", "Sixteen"},
+                {"7", "Seventeen"},
+                {"8", "Eighteen"},
+                {"9", "Nineteen"}
+            };
+        static Dictionary<string, string> _tensDict = new Dictionary<string, string>
+        {
+            {"2", "Twenty"},
+            {"3", "Thirty"},
+            {"4", "Forty"},
+            {"5", "Fifty"},
+            {"6", "Sixty"},
+            {"7", "Seventy"},
+            {"8", "Eighty"},
+            {"9", "Nintey"}
+        };
+
+        private static string Tens(string tens) // split this into two, create and access
         {
             string ten = tens[tens.Length - 2].ToString();
             string unit = tens[tens.Length - 1].ToString();
-            Dictionary<string, string> teensDict = new Dictionary<string, string>();
-            teensDict.Add("0", "Ten"); 
-            teensDict.Add("1", "Eleven");
-            teensDict.Add("2", "Twelve");
-            teensDict.Add("3", "Thirteen");
-            teensDict.Add("4", "Fourteen");
-            teensDict.Add("5", "Fifteen");
-            teensDict.Add("6", "Sixteen");
-            teensDict.Add("7", "Seventeen");
-            teensDict.Add("8", "Eighteen");
-            teensDict.Add("9", "Nineteen");
-
-            Dictionary<string, string> tensDict = new Dictionary<string, string>();
-            tensDict.Add("2", "Twenty");
-            tensDict.Add("3", "Thirty");
-            tensDict.Add("4", "Forty");
-            tensDict.Add("5", "Fifty");
-            tensDict.Add("6", "Sixty");
-            tensDict.Add("7", "Seventy");
-            tensDict.Add("8", "Eighty");
-            tensDict.Add("9", "Nintey");
 
             if (ten == "0")
                 Units(unit);
             if (ten == "1")
             {
-                string value = teensDict[unit];
+                string value = _teensDict[unit];
                 return value;
             }
-            if (tensDict.ContainsKey(ten))
+            if (_tensDict.ContainsKey(ten))
             {
-                string value = tensDict[ten];
+                string value = _tensDict[ten];
                 if (unit != "0")
                     return value + "-" + Units(unit);
                 else
@@ -107,15 +111,118 @@ namespace Numbers
             if (h != "0" & t == "00")
                 return Units(h) + HundredWord;
             // e.g. 024
-            if (h == "0")
-                return andWord + Tens(t);
-            else
-            {
+            if (hund == "000")
                 return null;
-            }
-
-           
+            if (t != "00")
+                return Tens(t);
+            else
+                return null;
         }
+
+        private static string BigNum(string bignum)
+        {
+            string ThousWord = " Thousand, ";
+            string MilWord = " Million, ";
+            string BilWord = " Billion, ";
+            string h = bignum.Substring(bignum.Length - 3);
+
+            if (bignum.Length < 5) // e.g. 3,000
+            {
+                string t = bignum.Substring(0, 1);
+                return Units(t) + ThousWord + Hundreds(h);
+            }
+            if (bignum.Length < 6) // e.g. 13,000
+            {
+                string t = bignum.Substring(0, 2);
+                return Tens(t) + ThousWord + Hundreds(h);
+            }
+            if (bignum.Length < 7) // e.g. 123,000
+            {
+                string t = bignum.Substring(0, 3);
+                return Hundreds(t) + ThousWord + Hundreds(h);
+            }
+            if (bignum.Length < 8) //1,000,000
+            {
+                string ht = bignum.Substring(bignum.Length - 6, bignum.Length - 4);
+                string m = bignum.Substring(0, 1);
+                if (ht != "000")
+                {
+                    return Units(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                }
+                if (ht == "000")
+                {
+                    return Units(m) + MilWord + Hundreds(h);
+                }
+            }
+            if (bignum.Length < 9) //10,100,000
+            {
+                string ht = bignum.Substring(bignum.Length - 6, bignum.Length - 4);
+                string m = bignum.Substring(0, 2);
+
+                if (ht != "000")
+                {
+                    return Tens(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                }
+                if (ht == "000")
+                {
+                    return Tens(m) + MilWord + Hundreds(h);
+                }
+            }
+            if (bignum.Length < 10) //100,100,000
+            {
+                string ht = bignum.Substring(bignum.Length - 6, bignum.Length - 4);
+                string m = bignum.Substring(0, 3);
+                if (ht != "000")
+                    return Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                if (ht == "000")
+                {
+                    return Hundreds(m) + MilWord + Hundreds(h);
+                }
+            }
+            if (bignum.Length < 11) //1,100,100,000
+            {
+                string ht = bignum.Substring(bignum.Length - 6, bignum.Length - 4);
+                string m = bignum.Substring(1, 3);
+                string b = bignum.Substring(0, 1);
+                if (m != "000")
+                {
+                    if (ht != "000")
+                        return Units(b) + BilWord + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    if (ht == "000")
+                        return Units(b) + BilWord + Hundreds(m) + MilWord + Hundreds(h);
+                }
+                if (m == "000")
+                {
+                    if (ht != "000")
+                        return Units(b) + BilWord + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    if (ht == "000")
+                        return Units(b) + BilWord + Hundreds(h);
+                }
+            }
+            if (bignum.Length < 12) //11,100,100,000
+            {
+                string ht = bignum.Substring(5,3);
+                string m = bignum.Substring(2, 3);
+                string b = bignum.Substring(0, 2);
+                if (m != "000")
+                {
+                    if (ht != "000")
+                        return Tens(b) + BilWord + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    if (ht == "000")
+                        return Tens(b) + BilWord + Hundreds(m) + MilWord + Hundreds(h);
+                }
+
+                if (m == "000")
+                {
+                    if (ht != "000")
+                        return Tens(b) + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    if (ht == "000")
+                        return Tens(b) + Hundreds(h);
+                }
+            }
+            return null;
+        }
+    
         public void Convert(string input)
         {
             string Minus = null;
@@ -160,77 +267,12 @@ namespace Numbers
                 else
                     Console.WriteLine(Minus + Units(input) + decim);
             }
-
             if (length == 2)
                 Console.WriteLine(Minus + Tens(input) + decim);
-
             if (length == 3)
                 Console.WriteLine(Minus + Hundreds(input) + decim);
-
-            if (length == 4)
-            {
-                string th = input.Substring(0, 1);
-                string h = input.Substring(1, 3);
-                Console.WriteLine(Minus + "{0} Thousand {1}", Units(th), Hundreds(h) + decim);
-            }
-            if (length == 5)
-            {
-                string th = input.Substring(0, 2);
-                string h = input.Substring(2, 3);
-                Console.WriteLine(Minus + "{0} Thousand {1}", Tens(th), Hundreds(h) + decim);
-            }
-            if (length == 6)  //100,000
-            {
-                string th = input.Substring(0, 3);
-                string h = input.Substring(3, 3);
-               Console.WriteLine(Minus + "{0} Thousand, {1}", Hundreds(th), Hundreds(h) + decim);
-            }
-            if (length == 7) //1,000,000
-            {
-                string m = input.Substring(0, 1);
-                string th = input.Substring(1, 3);
-                string h = input.Substring(4, 3);
-                Console.WriteLine(Minus + "{0} Million, {1} Thousand, {2}", Units(m), Hundreds(th), Hundreds(h) + decim);
-            }
-            if (length == 8) //10,000,000
-            {
-                string m = input.Substring(0, 2);
-                string th = input.Substring(2, 3);
-                string h = input.Substring(5, 3);
-                Console.WriteLine(Minus + "{0} Million, {1} Thousand, {2}", Tens(m), Hundreds(th), Hundreds(h) + decim);
-            }
-            if (length == 9) //100,000,000
-            {
-                string m = input.Substring(0, 3);
-                string th = input.Substring(3, 3);
-                string h = input.Substring(6, 3);
-                Console.WriteLine(Minus + "{0} Million, {1} Thousand, {2}", Hundreds(m), Hundreds(th), Hundreds(h) + decim);
-            }
-            if (length == 10) //1,000,000,000
-            {
-                string b = input.Substring(0, 1);
-                string m = input.Substring(1, 3);
-                string th = input.Substring(2, 3);
-                string h = input.Substring(5, 3);
-                Console.WriteLine(Minus + "{0} Billion, {1} Million, {2} Thousand, {3}", Units(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
-            }
-            if (length == 11) //10,000,000,000
-            {
-                string b = input.Substring(0, 2);
-                string m = input.Substring(2, 3);
-                string th = input.Substring(5, 3);
-                string h = input.Substring(8, 3);
-                Console.WriteLine(Minus + "{0} Billion, {1} Million, {2} Thousand, {3}", Tens(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
-            }
-            if (length == 12) //100,000,000,000
-            {
-                string b = input.Substring(0, 3);
-                string m = input.Substring(3, 3);
-                string th = input.Substring(6, 3);
-                string h = input.Substring(9, 3);
-                Console.WriteLine(Minus + "{0} Billion, {1} Million, {2} Thousand, {3}", Hundreds(b), Hundreds(m), Hundreds(th), Hundreds(h) + decim);
-            }
-
+            if (length > 3)
+                Console.WriteLine(Minus + BigNum(input) + decim);
             if (length > 12)
                 Console.WriteLine("Too many numbers Pal. Please enter a number between -999,999,999,999 to 999,999,999,999 to any number of decimal places");
         }
