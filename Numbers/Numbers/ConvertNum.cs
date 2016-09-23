@@ -48,18 +48,18 @@ namespace Numbers
         }
 
         static Dictionary<string, string> _teensDict = new Dictionary<string, string>
-            {
-                {"0", "Ten"}, 
-                {"1", "Eleven"},
-                {"2", "Twelve"},
-                {"3", "Thirteen"},
-                {"4", "Fourteen"},
-                {"5", "Fifteen"},
-                {"6", "Sixteen"},
-                {"7", "Seventeen"},
-                {"8", "Eighteen"},
-                {"9", "Nineteen"}
-            };
+        {
+            {"0", "Ten"}, 
+            {"1", "Eleven"},
+            {"2", "Twelve"},
+            {"3", "Thirteen"},
+            {"4", "Fourteen"},
+            {"5", "Fifteen"},
+            {"6", "Sixteen"},
+            {"7", "Seventeen"},
+            {"8", "Eighteen"},
+            {"9", "Nineteen"}
+        };
         static Dictionary<string, string> _tensDict = new Dictionary<string, string>
         {
             {"2", "Twenty"},
@@ -98,7 +98,8 @@ namespace Numbers
 
         private static string Hundreds(string hund)
         {
-            string HundredWord = " Hundred ";
+            string HundredWord = " Hundred";
+            string space = " ";
             string andWord = "and ";
 
             string h = hund.Substring(0,1);
@@ -106,24 +107,26 @@ namespace Numbers
 
             // e.g. 123
             if (h != "0" & t != "00")
-                return Units(h) + HundredWord + andWord + Tens(t);
+                return Units(h) + HundredWord + space + andWord + Tens(t);
             // e.g. 100
             if (h != "0" & t == "00")
                 return Units(h) + HundredWord;
-            // e.g. 024
+            //e.g. 000
             if (hund == "000")
                 return null;
+            // e.g. 024
             if (t != "00")
-                return Tens(t);
+                return andWord + Tens(t);
             else
                 return null;
         }
 
         private static string BigNum(string bignum)
         {
-            string ThousWord = " Thousand, ";
-            string MilWord = " Million, ";
-            string BilWord = " Billion, ";
+            string ThousWord = " Thousand";
+            string MilWord = " Million";
+            string BilWord = " Billion";
+            string space = " ";
             string h = bignum.Substring(bignum.Length - 3);
 
             if (bignum.Length < 5) // e.g. 3,000
@@ -134,12 +137,12 @@ namespace Numbers
             if (bignum.Length < 6) // e.g. 13,000
             {
                 string t = bignum.Substring(0, 2);
-                return Tens(t) + ThousWord + Hundreds(h);
+                return Tens(t) + ThousWord + space + Hundreds(h);
             }
             if (bignum.Length < 7) // e.g. 123,000
             {
                 string t = bignum.Substring(0, 3);
-                return Hundreds(t) + ThousWord + Hundreds(h);
+                return Hundreds(t) + ThousWord + space + Hundreds(h);
             }
             if (bignum.Length < 8) //1,000,000
             {
@@ -147,7 +150,7 @@ namespace Numbers
                 string m = bignum.Substring(0, 1);
                 if (ht != "000")
                 {
-                    return Units(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    return Units(m) + MilWord + space + Hundreds(ht) + ThousWord + space + Hundreds(h);
                 }
                 if (ht == "000")
                 {
@@ -161,7 +164,7 @@ namespace Numbers
 
                 if (ht != "000")
                 {
-                    return Tens(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    return Tens(m) + MilWord + space + Hundreds(ht) + ThousWord + space + Hundreds(h);
                 }
                 if (ht == "000")
                 {
@@ -173,7 +176,7 @@ namespace Numbers
                 string ht = bignum.Substring(bignum.Length - 6, bignum.Length - 4);
                 string m = bignum.Substring(0, 3);
                 if (ht != "000")
-                    return Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                    return Hundreds(m) + MilWord + space + Hundreds(ht) + ThousWord + space + Hundreds(h);
                 if (ht == "000")
                 {
                     return Hundreds(m) + MilWord + Hundreds(h);
@@ -187,14 +190,14 @@ namespace Numbers
                 if (m != "000")
                 {
                     if (ht != "000")
-                        return Units(b) + BilWord + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                        return Units(b) + BilWord + space + Hundreds(m) + MilWord + space + Hundreds(ht) + ThousWord + space + Hundreds(h);
                     if (ht == "000")
                         return Units(b) + BilWord + Hundreds(m) + MilWord + Hundreds(h);
                 }
                 if (m == "000")
                 {
                     if (ht != "000")
-                        return Units(b) + BilWord + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                        return Units(b) + BilWord + space + Hundreds(m) + MilWord + space + Hundreds(ht) + ThousWord + space + Hundreds(h);
                     if (ht == "000")
                         return Units(b) + BilWord + Hundreds(h);
                 }
@@ -207,7 +210,7 @@ namespace Numbers
                 if (m != "000")
                 {
                     if (ht != "000")
-                        return Tens(b) + BilWord + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                        return Tens(b) + BilWord + space + Hundreds(m) + MilWord + space + Hundreds(ht) + ThousWord + Hundreds(h);
                     if (ht == "000")
                         return Tens(b) + BilWord + Hundreds(m) + MilWord + Hundreds(h);
                 }
@@ -215,7 +218,7 @@ namespace Numbers
                 if (m == "000")
                 {
                     if (ht != "000")
-                        return Tens(b) + Hundreds(m) + MilWord + Hundreds(ht) + ThousWord + Hundreds(h);
+                        return Tens(b) + Hundreds(m) + MilWord + space + Hundreds(ht) + ThousWord + Hundreds(h);
                     if (ht == "000")
                         return Tens(b) + Hundreds(h);
                 }
@@ -223,10 +226,11 @@ namespace Numbers
             return null;
         }
     
-        public void Convert(string input)
+        public string Convert(string input)
         {
-            string Minus = null;
+            string minus = null;
             string decim = null;
+            string answer = null;
             
             //remove + or , and process the number as normal
             input = input.Replace(",", string.Empty);
@@ -234,9 +238,8 @@ namespace Numbers
            
             if (input.StartsWith("-"))
             {
-                string minus = "Minus ";
+                minus = "Minus ";
                 input = input.Substring(1);
-                Minus += minus;
             }
             if (input.Contains("."))
             {
@@ -255,26 +258,27 @@ namespace Numbers
             if (match.Success)
             {
                 input = "";
-                Console.WriteLine("Please enter a NUMBER between -999,999,999,999 to 999,999,999,999 to any number of decimal places");
+                answer = ("Please enter a NUMBER between -999,999,999,999 to 999,999,999,999 to any number of decimal places");
             }
-                
-
+                        
             int length = input.Length;
             if (length == 1)
             {
                 if (input == "0")
-                    Console.WriteLine(Minus + "Zero" + decim);
+                    answer = minus + "Zero" + decim;
                 else
-                    Console.WriteLine(Minus + Units(input) + decim);
+                    answer = minus + Units(input) + decim;
             }
             if (length == 2)
-                Console.WriteLine(Minus + Tens(input) + decim);
+                answer = minus + Tens(input) + decim;
             if (length == 3)
-                Console.WriteLine(Minus + Hundreds(input) + decim);
+                answer = minus + Hundreds(input) + decim;
             if (length > 3)
-                Console.WriteLine(Minus + BigNum(input) + decim);
+                answer = minus + BigNum(input) + decim;
             if (length > 12)
-                Console.WriteLine("Too many numbers Pal. Please enter a number between -999,999,999,999 to 999,999,999,999 to any number of decimal places");
+                answer = "Too many numbers Pal. Please enter a number between -999,999,999,999 to 999,999,999,999 to any number of decimal places";
+            return answer;
+
         }
-    }
+    } 
 }

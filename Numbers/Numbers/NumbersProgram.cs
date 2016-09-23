@@ -20,7 +20,8 @@ namespace Numbers
                 Console.WriteLine("Please enter a number between -999,999,999,999 to 999,999,999,999");
             }
             ConvertNum cn = new ConvertNum();
-            cn.Convert(input);
+            string output = cn.Convert(input);
+            Console.WriteLine(output);
             Console.ReadKey();
         }
     }

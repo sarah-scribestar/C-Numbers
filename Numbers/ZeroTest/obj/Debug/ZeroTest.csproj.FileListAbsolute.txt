@@ -1,0 +1,6 @@
+C:\Users\sarah.wilson\Documents\Visual Studio 2015\Projects\Numbers\ZeroTest\bin\Debug\ZeroTest.dll
+C:\Users\sarah.wilson\Documents\Visual Studio 2015\Projects\Numbers\ZeroTest\bin\Debug\ZeroTest.pdb
+C:\Users\sarah.wilson\Documents\Visual Studio 2015\Projects\Numbers\ZeroTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\sarah.wilson\Documents\Visual Studio 2015\Projects\Numbers\ZeroTest\obj\Debug\ZeroTest.csprojResolveAssemblyReference.cache
+C:\Users\sarah.wilson\Documents\Visual Studio 2015\Projects\Numbers\ZeroTest\obj\Debug\ZeroTest.dll
+C:\Users\sarah.wilson\Documents\Visual Studio 2015\Projects\Numbers\ZeroTest\obj\Debug\ZeroTest.pdb
